@@ -104,7 +104,7 @@ for arch in $ARCHS; do
         cd $tmpdir && \
         zip -r $ffdir.zip $ffdir && \
         cd - && \
-        mv $tmpdir/$ffdir.zip dist && \
+        mv $tmpdir/$ffdir.zip dist/$ffdir-$arch.zip && \
         rm -fr $tmpdir
     ) || echo Failed to package ffmpeg + x264
 
