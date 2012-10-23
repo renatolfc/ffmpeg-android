@@ -110,4 +110,4 @@ for arch in $ARCHS; do
 
 done
 
-# vim: ts=4 sw=4 noexpandtab softtabstop=4
+# vim: set ts=4 sw=4 noexpandtab softtabstop=4
