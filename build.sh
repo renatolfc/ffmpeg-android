@@ -1,4 +1,12 @@
 #!/bin/bash
+#
+# Author: Renato L. F. Cunha <renatoc@gmail.com>
+# This file is available according to the MIT license. Please refer to the
+# LICENSE file for details.
+#
+# This script builds a version of FFmpeg with h.264 support enabled by means of
+# the libx264 library.
+#
 
 if [ ! -e x264 ]; then
     echo Fetching x264...
