@@ -73,8 +73,6 @@ for arch in $ARCHS; do
             ;;
     esac
 
-    set -xv
-
     (
         cd x264 && CFLAGS="$EXTRA_CFLAGS" LDFLAGS="$EXTRA_LDFLAGS" \
         ./configure $CROSS_FLAGS --host=arm-linux-androideabi --enable-shared \
