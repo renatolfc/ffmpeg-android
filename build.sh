@@ -81,7 +81,7 @@ for arch in $ARCHS; do
         cd x264 && CFLAGS="$EXTRA_CFLAGS" LDFLAGS="$EXTRA_LDFLAGS" \
         ./configure $CROSS_FLAGS --host=arm-linux-androideabi --enable-shared \
         --prefix=../$X264_DEST --enable-static && make clean && make -j 4 && make install
-    )
+    ) || echo Failed to build x264
 
     EXTRA_CFLAGS="$EXTRA_CFLAGS -I../$X264_DEST/include"
     EXTRA_LDFLAGS="$EXTRA_LDFLAGS -L../$X264_DEST/lib"
@@ -91,7 +91,7 @@ for arch in $ARCHS; do
         ./configure $FFMPEG_FLAGS --extra-cflags="$EXTRA_CFLAGS" \
         --extra-ldflags="$EXTRA_LDFLAGS" --prefix=../$FFMPEG_DEST && \
         make clean && make -j 4 && make install
-    )
+    ) || echo Failed to build ffmpeg
 
     VERSION=$( (cd ffmpeg && git rev-list HEAD -n 1 | cut -c 1-12) )
 
