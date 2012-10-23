@@ -43,6 +43,10 @@ if [ ! -e build ]; then
     mkdir build
 fi
 
+if [ ! -e dist ]; then
+    mkdir dist
+fi
+
 CROSS_FLAGS="--sysroot=$SYSROOT --cross-prefix=arm-linux-androideabi-"
 FFMPEG_FLAGS="$CROSS_FLAGS --target-os=linux --enable-libx264 --enable-gpl --arch=arm"
 
@@ -88,6 +92,21 @@ for arch in $ARCHS; do
         --extra-ldflags="$EXTRA_LDFLAGS" --prefix=../$FFMPEG_DEST && \
         make clean && make -j 4 && make install
     )
+
+    VERSION=$( (cd ffmpeg && git rev-list HEAD -n 1 | cut -c 1-12) )
+
+    (
+        tmpdir=$(mktemp -d) && \
+        ffdir=ffmpeg-$VERSION
+        mkdir -p $tmpdir/$ffdir && \
+        cp -vfr $X264_DEST/* $tmpdir/$ffdir && \
+        cp -vfr $FFMPEG_DEST/* $tmpdir/$ffdir && \
+        cd $tmpdir && \
+        zip -r $ffdir.zip $ffdir && \
+        cd - && \
+        mv $tmpdir/$ffdir.zip dist && \
+        rm -fr $tmpdir
+    ) || echo Failed to package ffmpeg + x264
 
 done
 
