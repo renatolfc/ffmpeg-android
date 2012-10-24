@@ -87,8 +87,9 @@ for arch in $ARCHS; do
             EXTRA_LDFLAGS=""
             ;;
         *)
-            echo Unknown platform $arch
-            exit 1
+            echo Unknown platform $arch. Setting -march=$arch. Expect problems.
+            EXTRA_CFLAGS="-march=$arch"
+            EXTRA_LDFLAGS=""
             ;;
     esac
 
