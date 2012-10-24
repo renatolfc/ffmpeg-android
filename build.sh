@@ -113,14 +113,14 @@ for arch in $ARCHS; do
 
     (
         tmpdir=$(mktemp -d) && \
-        ffdir=ffmpeg-$VERSION
+        ffdir=ffmpeg-$arch-$VERSION
         mkdir -p $tmpdir/$ffdir && \
         cp -vfr $X264_DEST/* $tmpdir/$ffdir && \
         cp -vfr $FFMPEG_DEST/* $tmpdir/$ffdir && \
         cd $tmpdir && \
-        zip -r $ffdir.zip $ffdir && \
+        tar cjvf $ffdir.tar.bz2 $ffdir && \
         cd - && \
-        mv $tmpdir/$ffdir.zip dist/$ffdir-$arch.zip && \
+        mv $tmpdir/$ffdir.tar.bz2 dist/ && \
         rm -fr $tmpdir
     ) || echo Failed to package ffmpeg + x264
 
