@@ -56,7 +56,14 @@ if [ ! -e dist ]; then
 fi
 
 CROSS_FLAGS="--sysroot=$SYSROOT --cross-prefix=arm-linux-androideabi-"
-FFMPEG_FLAGS="$CROSS_FLAGS --target-os=linux --enable-libx264 --enable-gpl --arch=arm"
+FFMPEG_FLAGS="$CROSS_FLAGS \
+    --target-os=linux \
+    --enable-libx264 \
+    --enable-gpl \
+    --arch=arm \
+    --enable-pic \
+    --disable-doc
+"
 
 for arch in $ARCHS; do
     echo Building for $arch
