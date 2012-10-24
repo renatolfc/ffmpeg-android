@@ -119,8 +119,9 @@ for arch in $ARCHS; do
         cp -vfr $FFMPEG_DEST/* $tmpdir/$ffdir && \
         cd $tmpdir && \
         tar cjvf $ffdir.tar.bz2 $ffdir && \
+        tar cjvf $ffdir-bare.tar.bz2 $ffdir/bin $ffdir/lib/libx264* && \
         cd - && \
-        mv $tmpdir/$ffdir.tar.bz2 dist/ && \
+        mv $tmpdir/$ffdir{,-bare}.tar.bz2 dist/ && \
         rm -fr $tmpdir
     ) || echo Failed to package ffmpeg + x264
 
