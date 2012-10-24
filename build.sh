@@ -96,7 +96,7 @@ for arch in $ARCHS; do
     (
         cd x264 && CFLAGS="$EXTRA_CFLAGS" LDFLAGS="$EXTRA_LDFLAGS" \
         ./configure $CROSS_FLAGS --host=arm-linux-androideabi --enable-shared \
-        --prefix=../$X264_DEST --enable-static && make clean && make -j 4 && make install
+        --prefix=../$X264_DEST --enable-shared && make clean && make -j 4 && make install
     ) || echo Failed to build x264
 
     EXTRA_CFLAGS="$EXTRA_CFLAGS -I../$X264_DEST/include"
